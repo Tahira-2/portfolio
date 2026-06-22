@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahira - Portfolio</title>
+    <style>
+        /* ===== Reset & Variables ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #000000;
+            --bg-card: #111111;
+            --accent: #ffffff;
+            --accent-light: #ffffff;
+            --accent-glow: rgba(255, 255, 255, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --border: #333333;
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        a { color: var(--accent-light); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #cccccc; }
+
+        /* ===== Navigation ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.9rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* ===== Sections ===== */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title span { color: var(--accent); }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent-light);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+            margin-top: 0.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-skills {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-skill {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.9rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        .hero-buttons { display: flex; gap: 1rem; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: black;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: #cccccc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 25px var(--accent-glow);
+            color: black;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        /* ===== About ===== */
+        #about { background: var(--bg-secondary); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .about-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Education ===== */
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .edu-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .edu-details h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .edu-degree { color: var(--accent-light); font-weight: 600; margin-bottom: 0.25rem; }
+        .edu-date { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ===== Experience ===== */
+        #experience { background: var(--bg-secondary); }
+
+        .exp-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border-left: 3px solid var(--accent);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .exp-card:hover { transform: translateX(6px); }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .exp-role { font-size: 1.1rem; font-weight: 700; }
+        .exp-org { color: var(--accent-light); font-weight: 500; }
+        .exp-summary { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.4rem; }
+
+        .exp-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.75rem;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .exp-toggle {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .exp-card.open .exp-toggle { transform: rotate(180deg); }
+
+        .exp-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease;
+        }
+
+        .exp-card.open .exp-details {
+            max-height: 500px;
+            margin-top: 0.75rem;
+        }
+
+        .exp-details ul {
+            list-style: none;
+        }
+
+        .exp-details li {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .exp-details li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ===== Projects ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, var(--bg-card), rgba(255, 255, 255, 0.05));
+        }
+
+        .project-top {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .project-card h3 { font-size: 1.15rem; font-weight: 700; }
+
+        .project-summary {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+        }
+
+        .project-toggle {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .project-card.open .project-toggle { transform: rotate(180deg); }
+
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease;
+        }
+
+        .project-card.open .project-details {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-repo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent-light);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 100px;
+            transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .project-repo:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .project-repo svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--accent-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .tag-secondary {
+            background: rgba(161, 161, 170, 0.1);
+            color: var(--text-secondary);
+        }
+
+        /* ===== Contact ===== */
+        #contact { background: var(--bg-secondary); text-align: center; }
+
+        .contact-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-photo { width: 200px; height: 200px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-card.featured { grid-column: span 1; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.8rem; }
+            .exp-header { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 3rem 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .nav-inner { padding: 0.75rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo">T<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1>Hi, I'm <span class="highlight">Tahira</span></h1>
+            <p>Undergraduate Student Researcher | Texas State University <br>
+                Interested in low-level programming & system design.</p>
+            
+            <div class="hero-tag">Electrical &amp; Computer Engineering</div>
+            <div class="hero-skills">
+                <span class="hero-skill">Python</span>
+                <span class="hero-skill">C++</span>
+                <span class="hero-skill">Git</span>
+                <span class="hero-skill">MATLAB</span>
+                <span class="hero-skill">Linux</span>
+                <span class="hero-skill">SolidWorks</span>
+                <span class="hero-skill">3D Printing</span>
+                <span class="hero-skill">xTool (Laser Cutting)</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+        <img src="photo.jpeg" alt="Tahira" class="hero-photo">
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title">What I <span>Love Doing</span></h2>
+        <p class="section-subtitle">Areas of focus and technical interests</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-icon">&#9881;</div>
+                <h3>Embedded Systems</h3>
+                <p>Raspberry Pi projects, signal acquisition hardware, and real-time sensor integration for research and IoT applications.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">&#128187;</div>
+                <h3>Low-Level Programming</h3>
+                <p>CPU emulators, ALU simulators, binary file format manipulation, and systems programming in C++.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">&#128241;</div>
+                <h3>App Development</h3>
+                <p>Android applications with Kotlin and Jetpack Compose, focusing on real-time monitoring and data analytics.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+    <div class="container">
+        <h2 class="section-title">Edu<span>cation</span></h2>
+        <p class="section-subtitle">Academic background</p>
+        <div class="edu-card">
+            <div class="edu-icon">&#127891;</div>
+            <div class="edu-details">
+                <h3>Texas State University</h3>
+                <div class="edu-degree">B.S. Electrical Engineering (Computer Engineering Concentration)</div>
+                <div class="edu-date">August 2025 &ndash; May 2029</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Exper<span>ience</span></h2>
+        <p class="section-subtitle">Professional and research experience</p>
+        <div class="exp-timeline">
+
+            <div class="exp-card" onclick="this.classList.toggle('open')">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Undergraduate Research Assistant <span class="exp-toggle">&#9660;</span></div>
+                        <div class="exp-org">BCG Lab &mdash; Texas State University</div>
+                        <div class="exp-summary">Extended an existing ESP32 data acquisition system for physiological (BCG) signal monitoring</div>
+                    </div>
+                    <div class="exp-date">Current</div>
+                </div>
+                <div class="exp-details">
+                    <ul>
+                        <li>Extended an ESP32 acquisition codebase, added Wi-Fi connectivity and a custom HTTP server to make collected data files remotely accessible</li>
+                        <li>Proposed and implemented splitting the original single-file recording into multiple smaller time windows, reducing the risk of data loss from power interruptions</li>
+                        <li>Added an interrupt log file that records when the ESP32 abruptly loses data due to power loss, improving traceability of corrupted recordings</li>
+                        <li>Implemented a scheduling system so the ESP32 collects data only during a defined window and stays idle the rest of the time to conserve power</li>
+                        <li>Added a hardware switch on the Raspberry Pi to manually pause data collection on the ESP for the current cycle</li>
+                        <li>Set up Tailscale and rsync to securely transfer collected data from the local Pi to a remote computer on schedule</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-card" onclick="this.classList.toggle('open')">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Software Engineering Job Simulation <span class="exp-toggle">&#9660;</span></div>
+                        <div class="exp-org">Electronic Arts (EA) &mdash; Virtual Experience</div>
+                        <div class="exp-summary">Feature proposals, C++ system design, and performance optimization for EA Sports</div>
+                    </div>
+                    <div class="exp-date">January 2026</div>
+                </div>
+                <div class="exp-details">
+                    <ul>
+                        <li>Proposed a new gameplay feature for EA Sports College Football and wrote a detailed stakeholder proposal</li>
+                        <li>Designed a class diagram and implemented a C++ header file defining core system objects</li>
+                        <li>Resolved a bug and improved performance by optimizing data structures in an existing codebase</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Pro<span>jects</span></h2>
+        <p class="section-subtitle">Selected technical work</p>
+        <div class="projects-grid">
+
+            <div class="project-card featured" onclick="this.classList.toggle('open')">
+                <div class="project-top">
+                    <h3>App Tracker &mdash; Digital Wellbeing Monitor <span class="project-toggle">&#9660;</span></h3>
+                    <a href="https://github.com/Tahira-2/AppTracker" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Repo</a>
+                </div>
+                <div class="project-summary">Android app that monitors usage patterns, detects addictive behavior, and manages screen time</div>
+                <div class="project-details">
+                    <p class="project-desc">
+                        A full-featured Android app that tracks foreground app usage in real time and alerts users when they exceed configurable time limits. A foreground service polls UsageStatsManager every 5 seconds to detect the active app, and sessions are persisted to a Room database. The addiction detector runs on a 7-day rolling window and scores apps (0&ndash;4) based on daily usage over 1 hour, frequent opens (20+/day), compulsive short sessions, and late-night usage between 11 PM and 6 AM.
+                    </p>
+                    <p class="project-desc">
+                        Built with MVVM architecture using Hilt for dependency injection and Kotlin Coroutines with StateFlow for reactive data. Designed a fullscreen overlay warning system with escalating "Add Time" increments and a 60-second auto-dismiss safety net. Implemented a searchable settings screen with per-app sliders and a 3-step confirmation flow for excluding addictive apps. Created a weekly analytics dashboard with bar charts showing 7-day trends and a top-10 most-used ranking.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Jetpack Compose</span>
+                        <span class="tag">Room DB</span>
+                        <span class="tag">Hilt</span>
+                        <span class="tag">MVVM</span>
+                        <span class="tag">Material Design 3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="this.classList.toggle('open')">
+                <div class="project-top">
+                    <h3>MOS 6502 CPU Emulator <span class="project-toggle">&#9660;</span></h3>
+                    <a href="https://github.com/Tahira-2/CPU_Emulator" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Repo</a>
+                </div>
+                <div class="project-summary">Software emulator for the classic 8-bit microprocessor used in the NES and Apple II</div>
+                <div class="project-details">
+                    <p class="project-desc">
+                        The emulator faithfully replicates the MOS 6502 CPU at the instruction level. It models all internal state &mdash; registers (A, X, Y), the program counter, stack pointer, and all processor status flags (N, V, Z, C, D, I) &mdash; and simulates a full 64 KB memory map.
+                    </p>
+                    <p class="project-desc">
+                        Implemented all 151 official opcodes with a switch-based instruction decoder and isolated addressing mode handlers for Immediate, Zero Page, Absolute, Indexed (X/Y), Indexed Indirect, and Indirect Indexed. Built correct ADC/SBC logic including BCD decimal mode. Structured the codebase around a modular CPU core that cleanly separates instruction behavior, addressing modes, and state management for deterministic, testable execution.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag tag-secondary">CPU Architecture</span>
+                        <span class="tag tag-secondary">Emulation</span>
+                        <span class="tag tag-secondary">Low-Level Arithmetic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="this.classList.toggle('open')">
+                <div class="project-top">
+                    <h3>Binary ALU Simulator <span class="project-toggle">&#9660;</span></h3>
+                    <a href="https://github.com/Tahira-2/BinaryArithmetics" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Repo</a>
+                </div>
+                <div class="project-summary">Arithmetic-Logic Unit built from first principles using simulated logic gates</div>
+                <div class="project-details">
+                    <p class="project-desc">
+                        A console application that performs m,n-bit binary arithmetic on string-based inputs, demonstrating the fundamental logic used in CPU hardware. The calculator supports addition, subtraction, multiplication, division, modulo, and exponentiation on binary numbers of any length.
+                    </p>
+                    <p class="project-desc">
+                        Built the core adder by simulating XOR, AND, and OR gates, then chained them into an n-bit ripple-carry adder. Implemented subtraction via two's complement, multiplication using the classic shift-and-add algorithm, and division using the restoring (shift-and-subtract) algorithm that iterates bit-by-bit while maintaining a partial remainder. Added exponentiation by converting the binary exponent to decimal and performing repeated multiplication through the existing multiply unit.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag tag-secondary">Digital Logic</span>
+                        <span class="tag tag-secondary">Computer Architecture</span>
+                        <span class="tag tag-secondary">Gate Simulation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="this.classList.toggle('open')">
+                <div class="project-top">
+                    <h3>BMP Circle Generator <span class="project-toggle">&#9660;</span></h3>
+                    <a href="https://github.com/Tahira-2/BMP-image-generation" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Repo</a>
+                </div>
+                <div class="project-summary">Generates BMP images from scratch with no external libraries</div>
+                <div class="project-details">
+                    <p class="project-desc">
+                        A C++ program that produces valid 24-bit BMP image files entirely from raw binary data &mdash; no image libraries involved. The output is a 100&times;100 pixel image with a red circle centered on a white background.
+                    </p>
+                    <p class="project-desc">
+                        Manually constructed the 14-byte BMP file header and 40-byte DIB info header using packed structs to guarantee correct binary layout. Iterated over a pixel grid and applied the circle equation (x&minus;cx)&sup2; + (y&minus;cy)&sup2; &le; r&sup2; to classify each pixel as inside or outside. Handled row padding to 4-byte boundaries as required by the BMP spec and wrote the final output using reinterpret_cast and pointer arithmetic for precise memory-level control.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag tag-secondary">Binary I/O</span>
+                        <span class="tag tag-secondary">File Formats</span>
+                        <span class="tag tag-secondary">Memory Layout</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="project-card" onclick="this.classList.toggle('open')">
+                <div class="project-top">
+                    <h3>Face Tracking Camera <span class="project-toggle">&#9660;</span></h3>
+                </div>
+                <div class="project-summary">IEEE project building a real-time face-tracking system on Raspberry Pi</div>
+                <div class="project-details">
+                    <p class="project-desc">
+                        An ongoing IEEE student chapter project that builds a camera system capable of autonomously detecting and following a human face in real time. The camera tracks the subject's position in the frame and adjusts pan/tilt servos to keep the face centered.
+                    </p>
+                    <p class="project-desc">
+                        Set up a Raspberry Pi with a camera module and integrated computer vision libraries for face detection. Connected servo motors for pan and tilt control, and wrote the control loop that translates pixel-space face coordinates into servo angle adjustments. Currently refining the tracking smoothness and response latency for reliable real-time performance.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Raspberry Pi</span>
+                        <span class="tag">Python</span>
+                        <span class="tag tag-secondary">Computer Vision</span>
+                        <span class="tag tag-secondary">Embedded</span>
+                        <span class="tag tag-secondary">Servo Control</span>
+                    </div>
+                </div>
+            </div> -->
+
+
+            
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title">Get in <span>Touch</span></h2>
+        <p class="contact-text">Interested in collaborating or have a question? Feel free to reach out.</p>
+        <div class="contact-links">
+            <a href="mailto:tahirajbushra@gmail.com" class="btn btn-primary">Email</a>
+            <a href="https://github.com/Tahira-2/" class="btn btn-outline" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/tahira-juhair-boshra-7b3479380/" class="btn btn-outline" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Tahira</p>
+</footer>
+
+</body>
+</html>
