@@ -539,19 +539,6 @@
             fill: currentColor;
         }
 
-        .tag {
-            background: rgba(255, 255, 255, 0.12);
-            color: var(--accent-light);
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .tag-secondary {
-            background: rgba(161, 161, 170, 0.1);
-            color: var(--text-secondary);
-        }
 
         /* ===== Contact ===== */
         #contact { background: var(--bg-secondary); text-align: center; }
@@ -824,11 +811,11 @@
                 <div class="project-top">
                     <h3 onclick="this.closest('.project-card').classList.toggle('open')">Bobcat Market &mdash; Student Marketplace for Texas State University 
                         <span class="project-toggle">&#9660;</span></h3>
-                    <a href="https://bobcat-market.vercel.app/" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16">
-                        <path d=""/></svg> Visit</a>
+                    <a href="https://bobcat-market.vercel.app/" class="project-repo" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 011-3.46c.13.9.5 1.63 1.06 1.9.5.24.66.6.66 1.1 0 .8.4 1.2 1.2 1.2.5 0 .8.2.8.9 0 .6.3 1 .9 1.1v1.9A6.51 6.51 0 011.5 8zm8.5 6.3v-.8c0-.9-.5-1.5-1.4-1.5H7.2c-.5 0-.8-.3-.8-.8 0-.6.3-.9.8-.9.9 0 1.4-.5 1.4-1.4v-.4c0-.5.3-.8.8-.8h.8c.9 0 1.4-.5 1.4-1.4V5.6A6.5 6.5 0 0110 14.3z"/></svg> Visit</a>
+
                     </div>
-                <div class="project-details"></div>
-                    <p>Developed a full-stack marketplace web application exclusively for Texas State University students, providing a secure platform to buy 
+                <div class="project-details">
+                    <p>Developed a full-stack marketplace web application exclusively for Texas State University students, providing a secure platform to buy
                         and sell items within the campus community. The application uses university email verification to ensure that all users are verified 
                         students while offering real-time messaging, image uploads, favorites, and listing management through a modern, mobile-first interface.</p>
                     
@@ -848,6 +835,7 @@
                         <li><strong>Frontend:</strong>Next.js (App Router), React, Tailwind CSS</li>
                         <li><strong> Backend & Deployment:</strong>Supabase (PostgreSQL, Auth, Storage, Realtime), Vercel</li>
                     </ul>
+                </div>
             </div>
 
 
@@ -861,7 +849,7 @@
                     <p> A software-based emulator for the MOS 6502 8-bit microprocessor, accurately modeling the internal state, instruction execution pipeline, and 
                         memory access behavior of the historic hardware used in the NES, Apple II, and Commodore 64.</p>
                     
-                    <dev class="project-section-heading"> Key Contributions & Architecture </dev>
+                    <div class="project-section-heading"> Key Contributions & Architecture </div>
                     <ul>
                         <li> <b> Instruction-Level Accuracy:</b> Implemented all 151 official MOS 6502 opcodes, accurately simulating the full fetch–decode–execute 
                             cycle, including stack operations, register updates, and status flag behavior.</li>
@@ -871,7 +859,7 @@
                             and testability.</li>
                     </ul>
 
-                    <dev class="project-section-heading"> Technology & concept</dev>
+                    <div class="project-section-heading"> Technology & concept</div>
                     <ul>
                         <li> <strong> Language & Tools</strong> C++, Visual Studio, Git </li>
                         <li> <strong> Domain Expertise</strong> Computer Architecture, Instruction Set Architecture (ISA), CPU State Management, 
@@ -1015,6 +1003,17 @@
 <footer>
     <p>&copy; 2026 Tahira</p>
 </footer>
+
+<script>
+    // Collapse any open experience/project card when clicking outside of it
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('.exp-card.open, .project-card.open').forEach(function (card) {
+            if (!card.contains(e.target)) {
+                card.classList.remove('open');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
